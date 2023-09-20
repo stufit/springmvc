@@ -23,6 +23,12 @@ public class RequestBodyJson {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * 서블렛을 사용한 리퀘스트를 바디로 받을때 형식
+     * @param request
+     * @param response
+     * @throws IOException
+     */
     @PostMapping("/request-body-json-v1")
     public void requestBodyJsonV1(HttpServletRequest request, HttpServletResponse response) throws IOException {
         ServletInputStream inputStream = request.getInputStream();
@@ -33,6 +39,13 @@ public class RequestBodyJson {
         response.getWriter().write("ok");
     }
 
+    /**
+     * @RequestBody를 사용한 리퀘스트 바디를 받을때 형식
+     * @ResponseBody를 사용한 리스폰스 바디를 보낼때 형식
+     * @param messageBody
+     * @return
+     * @throws IOException
+     */
     @ResponseBody
     @PostMapping("/request-body-json-v2")
     public String requestBodyJsonV2(@RequestBody String messageBody) throws IOException{
@@ -42,6 +55,12 @@ public class RequestBodyJson {
         return "ok";
     }
 
+    /**
+     * @RequestBody를 사용한 리퀘스트 바디를 받을때 형식
+     * 이 때, HelloData(인터페이스) 자체로 받을 수 있음.
+     * @param messageBody
+     * @return
+     */
     @ResponseBody
     @PostMapping("/request-body-json-v3")
     public String requestBodyJsonV3(@RequestBody HelloData messageBody)  {
@@ -57,6 +76,12 @@ public class RequestBodyJson {
         return "ok";
     }
 
+    /**
+     * @RequestBody를 사용한 리퀘스트 바디를 받을때 형식
+     * return 값으로 HelloData(인터페이스)를 사용할 수 있음.
+     * @param messageBody
+     * @return
+     */
     @ResponseBody
     @PostMapping("/request-body-json-v5")
     public HelloData requestBodyJsonV5(@RequestBody HelloData messageBody)  {
